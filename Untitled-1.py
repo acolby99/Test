@@ -21,7 +21,7 @@ print ("4. Read specified file")
 
 answer = input ("Please enter the number of the menu item you want to perform: ")
 
-if answer() == "1":
+if answer == "1":
     companyName = "Dunwoody College"
     programName = "Computer Networking"
     uName = os.environ['UserName']
@@ -30,12 +30,12 @@ if answer() == "1":
     print ("Logged on as", uName, "at", companyName, "in department:", programName)
     print ("My first class is", classFirst, "and my second class is", classSecond)
 
-elif answer() == "2":
+elif answer == "2":
     state = GetState()
     newState = FormalState(state)
-    print ("State was", state, "and is now", state)
+    print ("State was", state, "and is now", newState)
 
-elif answer() == "3":
+elif answer == "3":
     fileName = input ("Enter a file name to create: ")
     fList = []
     dList = []
@@ -45,6 +45,17 @@ elif answer() == "3":
         else:
             dList.append(p)
 
-elif answer() == "4":
-    fRead = input ("Enter a filename to read")
-    fileContents = fRead.read()
+    with open(fileName, "w") as myFileWrite:
+        myFileWrite.write("These are my files:\n")
+        for f in fList:
+            myFileWrite.write(f.name)
+            myFileWrite.write("\n")
+
+elif answer == "4":
+    fRead = input ("Enter a filename to read: ")
+
+    with open(fRead, "r+") as myFileRead:
+        print(myFileRead.read())
+
+else:
+    print ("Have a nice day")
